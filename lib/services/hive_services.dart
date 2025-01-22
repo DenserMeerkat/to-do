@@ -44,16 +44,43 @@ class HiveHandler {
       String userId, String todoId, Map<String, dynamic> todoJson) async {
     final box = await _getTodoBox(userId);
     await box.put(todoId, todoJson);
+
+    final orderIds = box.get('order', defaultValue: <String>[]) as List;
+    if (!orderIds.contains(todoId)) {
+      orderIds.add(todoId);
+      await box.put('order', orderIds);
+    }
   }
 
   Future<List<Map<String, dynamic>>> getUserTodos(String userId) async {
     final box = await _getTodoBox(userId);
-    return box.values.cast<Map<String, dynamic>>().toList();
+    final orderIds = box.get('order', defaultValue: <String>[]) as List;
+
+    if (orderIds.isEmpty) {
+      final todos = box.values
+          .whereType<Map<dynamic, dynamic>>()
+          .map((item) => Map<String, dynamic>.from(item))
+          .toList();
+
+      final ids = todos.map((todo) => todo['id'] as String).toList();
+      await box.put('order', ids);
+      return todos;
+    }
+
+    return orderIds
+        .map((id) => box.get(id))
+        .whereType<Map<dynamic, dynamic>>()
+        .map((item) => Map<String, dynamic>.from(item))
+        .toList();
   }
 
   Future<void> deleteTodo(String userId, String todoId) async {
     final box = await _getTodoBox(userId);
     await box.delete(todoId);
+
+    final orderIds = box.get('order', defaultValue: <String>[]) as List;
+    orderIds.remove(todoId);
+    await box.put('order', orderIds);
   }
 
   Future<void> clearUserTodos(String userId) async {
@@ -85,5 +112,10 @@ class HiveHandler {
       await box.close();
       _todoBoxes.remove(userId);
     }
+  }
+
+  Future<void> reorderTodos(String userId, List<String> newOrder) async {
+    final box = await _getTodoBox(userId);
+    await box.put('order', newOrder);
   }
 }

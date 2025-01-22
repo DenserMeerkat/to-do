@@ -24,16 +24,7 @@ class _LoginFormState extends ConsumerState<LoginForm> {
                 values[_usernameKey] as String, values[_passwordKey] as String);
             if (!context.mounted) return;
             if (result) {
-              showToast(
-                  context: context,
-                  builder: (context, overlay) => buildToast(
-                        context,
-                        overlay,
-                        'Success',
-                        'Logged in successfully',
-                      ),
-                  location: ToastLocation.topCenter);
-              context.router.pushNamed('/todo');
+              context.router.replaceNamed('/todo');
             } else {
               showToast(
                   context: context,

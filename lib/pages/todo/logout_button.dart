@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:to_do_app/providers/providers.dart';
@@ -33,7 +32,6 @@ class LogoutButton extends ConsumerWidget {
                   child: const Text('Logout'),
                   onPressed: () {
                     ref.read(authProvider.notifier).signOut();
-                    context.router.replaceNamed('/auth');
                   },
                 ),
               ],

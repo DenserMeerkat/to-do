@@ -51,4 +51,14 @@ class TodoNotifier extends StateNotifier<List<Todo>> {
     await hiveHandler.clearUserTodos(userId);
     state = [];
   }
+
+  Future<void> reorderTodo(String userId, int oldIndex, int newIndex) async {
+    final newList = [...state];
+    final todo = newList.removeAt(oldIndex);
+    newList.insert(newIndex, todo);
+    state = newList;
+
+    final orderIds = newList.map((todo) => todo.id).toList();
+    await hiveHandler.reorderTodos(userId, orderIds);
+  }
 }
