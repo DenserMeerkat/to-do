@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:to_do_app/pages/auth.dart';
-import 'package:to_do_app/pages/todo.dart';
+import 'package:to_do_app/pages/auth_page.dart';
+import 'package:to_do_app/pages/todo_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../providers/auth_provider.dart';
 

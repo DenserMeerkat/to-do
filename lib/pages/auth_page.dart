@@ -3,8 +3,8 @@ import 'package:flutter/material.dart' as m;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:to_do_app/components/components.dart';
-import 'package:to_do_app/pages/auth/login.dart';
-import 'package:to_do_app/pages/auth/signup.dart';
+import 'package:to_do_app/pages/auth/login_form.dart';
+import 'package:to_do_app/pages/auth/signup_form.dart';
 import 'package:to_do_app/providers/providers.dart';
 
 @RoutePage()
@@ -37,7 +37,12 @@ class _AuthPageState extends ConsumerState<AuthPage>
       loadingProgressIndeterminate: ref.watch(isAuthLoadingProvider),
       headers: [
         AppBar(
-          title: AppTitle(),
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+          title: Row(
+            children: [
+              AppTitle(),
+            ],
+          ),
         ),
         const Divider(),
       ],

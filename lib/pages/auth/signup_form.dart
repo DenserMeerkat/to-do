@@ -64,7 +64,6 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
                         key: _usernameKey,
                         label: const Text('Username'),
                         validator: const LengthValidator(min: 4),
-                        padding: EdgeInsets.zero,
                         showErrors: const {
                           FormValidationMode.changed,
                           FormValidationMode.submitted

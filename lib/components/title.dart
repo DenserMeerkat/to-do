@@ -5,12 +5,20 @@ class AppTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Icon(RadixIcons.checkCircled),
-        Text('ToDo'),
-      ],
-    ).gap(8);
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.muted,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(RadixIcons.checkCircled),
+          gap(8),
+          Text('ToDo'),
+        ],
+      ),
+    );
   }
 }
