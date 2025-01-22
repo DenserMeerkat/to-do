@@ -1,4 +1,5 @@
 import 'package:shadcn_flutter/shadcn_flutter.dart';
+import 'package:to_do_app/constants.dart';
 
 class AppTitle extends StatelessWidget {
   const AppTitle({super.key});
@@ -16,7 +17,7 @@ class AppTitle extends StatelessWidget {
         children: [
           Icon(RadixIcons.checkCircled),
           gap(8),
-          Text('ToDo'),
+          Text(kAppName),
         ],
       ),
     );

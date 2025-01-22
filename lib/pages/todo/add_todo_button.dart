@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart' as m;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
+import 'package:to_do_app/constants.dart';
 import 'package:to_do_app/providers/providers.dart';
 
 class AddTodoButton extends ConsumerStatefulWidget {
@@ -41,18 +42,18 @@ class _AddTodoButtonState extends ConsumerState<AddTodoButton> {
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            title: const Text('Add Todo'),
+            title: const Text(kAddTodoLabel),
             content: TextField(
               controller: controller,
               focusNode: focusNode,
             ),
             actions: [
               SecondaryButton(
-                child: const Text('Cancel'),
+                child: const Text(kCancelLabel),
                 onPressed: () => Navigator.pop(context),
               ),
               PrimaryButton(
-                child: const Text('Add'),
+                child: const Text(kAddLabel),
                 onPressed: () {
                   if (controller.text.isNotEmpty) {
                     ref

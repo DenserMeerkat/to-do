@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:to_do_app/components/components.dart';
+import 'package:to_do_app/constants.dart';
 import 'package:to_do_app/providers/providers.dart';
 
 class LoginForm extends ConsumerStatefulWidget {
@@ -31,8 +32,8 @@ class _LoginFormState extends ConsumerState<LoginForm> {
                   builder: (context, overlay) => buildToast(
                         context,
                         overlay,
-                        'Error',
-                        'Invalid credentials',
+                        kErrorLabel,
+                        kLoginErrorMessage,
                       ),
                   location: ToastLocation.topCenter);
             }
@@ -44,8 +45,8 @@ class _LoginFormState extends ConsumerState<LoginForm> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Login").semiBold(),
-                  const Text('Enter your credentials').muted().small(),
+                  Text(kLoginLabel).semiBold(),
+                  const Text(kLoginSubtitle).muted().small(),
                   const Gap(24),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -53,7 +54,7 @@ class _LoginFormState extends ConsumerState<LoginForm> {
                     children: [
                       FormField<String>(
                           key: _usernameKey,
-                          label: const Text('Username'),
+                          label: const Text(kUsernameLabel),
                           validator: const LengthValidator(min: 4),
                           padding: EdgeInsets.zero,
                           showErrors: const {
@@ -67,7 +68,7 @@ class _LoginFormState extends ConsumerState<LoginForm> {
                           )),
                       FormField<String>(
                         key: _passwordKey,
-                        label: const Text('Password'),
+                        label: const Text(kPasswordLabel),
                         validator: const LengthValidator(min: 8),
                         showErrors: const {
                           FormValidationMode.changed,
@@ -86,7 +87,7 @@ class _LoginFormState extends ConsumerState<LoginForm> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Text('Continue'),
+                            const Text(kContinueLabel),
                           ],
                         ),
                       );

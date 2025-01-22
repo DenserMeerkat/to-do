@@ -2,6 +2,7 @@ import 'package:flutter/material.dart' as m;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:to_do_app/components/components.dart';
+import 'package:to_do_app/constants.dart';
 import 'package:to_do_app/providers/providers.dart';
 
 class SignUpForm extends ConsumerStatefulWidget {
@@ -30,8 +31,8 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
                   builder: (context, overlay) => buildToast(
                         context,
                         overlay,
-                        'Success',
-                        'Account created successfully',
+                        kSuccessLabel,
+                        kSignUpSuccessMessage,
                       ),
                   location: ToastLocation.topCenter);
               widget.tabController.animateTo(0);
@@ -41,8 +42,8 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
                   builder: (context, overlay) => buildToast(
                         context,
                         overlay,
-                        'Error',
-                        'Username already exists',
+                        kErrorLabel,
+                        kSignUpErrorMessage,
                       ),
                   location: ToastLocation.topCenter);
             }
@@ -54,15 +55,15 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Sign Up").semiBold(),
-                  const Text('Create an account').muted().small(),
+                  Text(kSignupLabel).semiBold(),
+                  const Text(kSignupSubtitle).muted().small(),
                   const Gap(24),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       FormField<String>(
                         key: _usernameKey,
-                        label: const Text('Username'),
+                        label: const Text(kUsernameLabel),
                         validator: const LengthValidator(min: 4),
                         showErrors: const {
                           FormValidationMode.changed,
@@ -76,7 +77,7 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
                       ),
                       FormField<String>(
                         key: _passwordKey,
-                        label: const Text('Password'),
+                        label: const Text(kPasswordLabel),
                         validator: const LengthValidator(min: 8),
                         showErrors: const {
                           FormValidationMode.changed,
@@ -86,9 +87,9 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
                       ),
                       FormField<String>(
                         key: _confirmPasswordKey,
-                        label: const Text('Confirm Password'),
+                        label: const Text(kConfirmPasswordLabel),
                         validator: CompareWith.equal(_passwordKey,
-                            message: 'Passwords do not match'),
+                            message: kPasswordMismatchMessage),
                         showErrors: const {
                           FormValidationMode.changed,
                           FormValidationMode.submitted
@@ -106,7 +107,7 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Text('Continue'),
+                            const Text(kContinueLabel),
                           ],
                         ),
                       );

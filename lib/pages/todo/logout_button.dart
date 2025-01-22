@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
+import 'package:to_do_app/constants.dart';
 import 'package:to_do_app/providers/providers.dart';
 
 class LogoutButton extends ConsumerWidget {
@@ -13,23 +14,23 @@ class LogoutButton extends ConsumerWidget {
           context: context,
           builder: (context) {
             return AlertDialog(
-              title: const Text('Logout'),
+              title: const Text(kLogoutLabel),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Are you sure you want to logout?'),
+                  const Text(kLogoutConfirmationMessage),
                 ],
               ),
               actions: [
                 SecondaryButton(
-                  child: const Text('Cancel'),
+                  child: const Text(kCancelLabel),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
                 ),
                 PrimaryButton(
-                  child: const Text('Logout'),
+                  child: const Text(kLogoutLabel),
                   onPressed: () {
                     ref.read(authProvider.notifier).signOut();
                   },

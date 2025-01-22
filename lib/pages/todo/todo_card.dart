@@ -1,4 +1,5 @@
 import 'package:shadcn_flutter/shadcn_flutter.dart';
+import 'package:to_do_app/constants.dart';
 import 'package:to_do_app/models/todo.dart';
 
 class TodoCard extends StatefulWidget {
@@ -81,20 +82,20 @@ class _TodoCardState extends State<TodoCard> {
                           showDialog(
                             context: context,
                             builder: (context) => AlertDialog(
-                              title: const Text('Edit Todo'),
+                              title: const Text(kEditTodoLabel),
                               content: TextField(
                                 controller: controller,
                                 focusNode: focusNode,
                               ),
                               actions: [
                                 SecondaryButton(
-                                  child: const Text('Cancel'),
+                                  child: const Text(kCancelLabel),
                                   onPressed: () {
                                     Navigator.of(context).pop();
                                   },
                                 ),
                                 PrimaryButton(
-                                  child: const Text('Save'),
+                                  child: const Text(kSaveLabel),
                                   onPressed: () {
                                     Navigator.pop(context);
                                     widget.onTodoChanged(
@@ -109,7 +110,7 @@ class _TodoCardState extends State<TodoCard> {
                           );
                         },
                         leading: const Icon(RadixIcons.pencil2),
-                        child: const Text('Edit'),
+                        child: const Text(kEditLabel),
                       ),
                       MenuDivider(),
                       MenuButton(
@@ -117,18 +118,18 @@ class _TodoCardState extends State<TodoCard> {
                           showDialog(
                             context: context,
                             builder: (context) => AlertDialog(
-                              title: const Text('Delete Todo'),
-                              content: const Text(
-                                  'Are you sure you want to delete this todo?'),
+                              title: const Text(kDeleteTodoLabel),
+                              content:
+                                  const Text(kDeleteTodoConfirmationMessage),
                               actions: [
                                 SecondaryButton(
-                                  child: const Text('Cancel'),
+                                  child: const Text(kCancelLabel),
                                   onPressed: () {
                                     Navigator.of(context).pop();
                                   },
                                 ),
                                 PrimaryButton(
-                                  child: const Text('Delete'),
+                                  child: const Text(kDeleteLabel),
                                   onPressed: () {
                                     Navigator.pop(context);
                                     widget.onDeleteTodo(widget.todo.id);
@@ -139,7 +140,7 @@ class _TodoCardState extends State<TodoCard> {
                           );
                         },
                         leading: const Icon(RadixIcons.trash),
-                        child: const Text('Delete'),
+                        child: const Text(kDeleteLabel),
                       ),
                     ],
                   );
